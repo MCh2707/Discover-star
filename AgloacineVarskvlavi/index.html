@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agmoacine Varskvlavi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/logo.png" type="image/png">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>LOGO</p>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#" class="link active">მთავარი</a></li>
+                    <li><a href="#" class="link">ბლოგი</a></li>
+                    <li><a href="servise.html" class="link" id="servicesLink">სერვისი</a></li>
+                    <li><a href="#" class="link">ჩვენს შესახებ</a></li>
+                </ul>
+            </div>
+            <div class="nav-button">
+                <button class="btn white-btn" id="loginBtn" onclick="login()">შესვლა</button>
+                <button class="btn" id="registerBtn" onclick="register()">რეგისტრაცია</button>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+            </div>
+        </nav>
+
+        <div class="form-box">
+            <!-- Login Form -->
+            <div class="login-container" id="login">
+                <div class="top">
+                    <span>არ გაქვთ ანგარიში? <a href="#" onclick="register()">დარეგისტრირდით</a></span>
+                    <header>შესვლა</header>
+                </div>
+                <div class="input-box">
+                    <input type="text" id="login-username" class="input-field" placeholder="მომხმარებლის სახელი ან ელ-ფოსტა">
+                    <i class="bx bx-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="login-password" class="input-field" placeholder="პაროლი">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <button class="submit" onclick="handleLogin()">შესვლა</button>
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="login-check">
+                        <label for="login-check">დაიმახსოვრეთ</label>
+                    </div>
+                    <div class="two">
+                        <label><a href="">დაგავიწყდა პარლლი?</a></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="register-container" id="register">
+                <div class="top">
+                    <span>გაქვთ ანგარიში? <a href="#" onclick="login()">შეუერთდით</a></span>
+                    <header>რეგისტრაცია</header>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="სახელი" id="register-firstname">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="გვარი" id="register-lastname">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="კლასი" id="register-class">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="დამრიგებლის სახელი, გვარი" id="register-teacher">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" class="input-field" placeholder="ელ-ფოსტა" id="register-email">
+                    <i class="bx bx-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" placeholder="პაროლი" id="register-password">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="რეგისტრაცია" onclick="handleRegister()">
+                </div>
+                <!--
+                                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="register-check">
+                        <label for="register-check"> I accept the terms and conditions</label>
+                    </div>
+                </div>
+                 -->
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js">
+
+function registerUser() {
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const classValue = document.getElementById('class').value;
+            const teacher = document.getElementById('teacher').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Save the registered information to local storage
+            localStorage.setItem('firstname', firstname);
+            localStorage.setItem('lastname', lastname);
+            localStorage.setItem('class', classValue);
+            localStorage.setItem('teacher', teacher);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+
+            alert("Registration Successful!");
+        }
+
+        document.getElementById('servicesLink').addEventListener('click', function() {
+            const firstname = localStorage.getItem('firstname');
+            const lastname = localStorage.getItem('lastname');
+            const classValue = localStorage.getItem('class');
+            const teacher = localStorage.getItem('teacher');
+            const email = localStorage.getItem('email');
+
+            // Display the information
+            if (firstname && lastname) {
+                document.getElementById('displayInfo').textContent = `Name: ${firstname}, Surname: ${lastname}, Class: ${classValue}, Teacher: ${teacher}, Email: ${email}`;
+                document.getElementById('serviceDisplay').style.display = 'block';
+            } else {
+                alert("No registered data found!");
+            }
+        });
+
+                // Sample user data (this should be replaced with actual data from registration)
+                const registeredUser = {
+            firstname: "John",
+            lastname: "Doe",
+            email: "john.doe@example.com"
+        };
+
+        document.getElementById('servicesLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            
+            // Display the registered user data
+            const displayInfo = `Name: ${registeredUser.firstname}, Surname: ${registeredUser.lastname}, Email: ${registeredUser.email}`;
+            document.getElementById('displayInfo').textContent = displayInfo;
+            document.getElementById('userDataDisplay').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
